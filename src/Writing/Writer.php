@@ -75,6 +75,12 @@ class Writer
      */
     private $lastTimesWeModifiedTheseFiles = [];
 
+    /**
+     * 
+     * @var int
+     */
+    private static $routeId = 0;
+
     public function __construct(DocumentationConfig $config = null, bool $shouldOverwrite = false)
     {
         // If no config is injected, pull from global. Makes testing easier.
@@ -167,6 +173,7 @@ class Writer
                     ->with('settings', $settings)
                     ->with('auth', $auth)
                     ->with('baseUrl', $this->baseUrl)
+                    ->with('routeId', $this::$routeId++)
                     ->render();
 
                 return $route;
